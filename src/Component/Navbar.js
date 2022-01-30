@@ -28,7 +28,7 @@ function Navbarx() {
 
   return (
     <>
-      <Navbar style={{ backgroundImage: "url(/img/bgbaru.png)" }} expand={false} className="d-flex justify-content-start">
+      <Navbar style={{ backgroundImage: "url(/img/bgbaru.png)" }} expand={false} className="d-flex justify-content-start ">
         <Navbar.Toggle aria-controls="offcanvasNavbar" className=" m-2" />
         <Navbar.Brand href="/" className="text-white align-self-start flex-grow-1 m-2">
           <img alt="" src="img/putihpdam.png" width="30" height="30" className="d-inline align-top" /> DASHBOARD PDAM KABUPATEN MADIUN

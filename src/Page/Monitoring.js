@@ -162,6 +162,11 @@ const Monitoring = () => {
       sort: true,
     },
     {
+      dataField: "flowrateliter",
+      text: "Flowrate (liter/s)",
+      sort: true,
+    },
+    {
       dataField: "fss",
       text: "FSS (m/s)",
       sort: true,
@@ -206,6 +211,10 @@ const Monitoring = () => {
     },
     {
       dataField: "flowrate",
+      order: "asc",
+    },
+    {
+      dataField: "flowrateliter",
       order: "asc",
     },
     {
