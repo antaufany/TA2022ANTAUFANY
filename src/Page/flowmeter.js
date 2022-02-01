@@ -7,7 +7,10 @@ import ReactSpeedometer from "react-d3-speedometer";
 import AccordionHeader from "react-bootstrap/esm/AccordionHeader";
 import AccordionBody from "react-bootstrap/esm/AccordionBody";
 import { IoPhonePortraitOutline } from "react-icons/io5";
+import { perf } from "../Firebase";
 const Flowmeter = () => {
+  const Tracer = perf.trace("trace-flow");
+  Tracer.start();
   const [getData, setGetData] = useState([]);
   const [dataGauge, setDataGauge] = useState([]);
   useEffect(() => {
@@ -24,6 +27,7 @@ const Flowmeter = () => {
       ewsApp.off();
     };
   }, [dataGauge]);
+  Tracer.stop();
 
   return (
     <>

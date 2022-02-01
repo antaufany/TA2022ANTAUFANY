@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
-
+import { perf } from "../Firebase";
 import CRUDHandler from "../Handler/CRUDHandler";
 import { Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const MapContainer = () => {
+  const Tracer = perf.trace("map-tracer");
+  Tracer.start();
   const [dataSet, setDataSet] = useState([]);
   const [dataSet2, setDataSet2] = useState([]);
 
@@ -57,6 +59,7 @@ const MapContainer = () => {
       getData.off();
     };
   }, []);
+  Tracer.stop();
   const stylingMaps = {
     maxWidth: "3840px",
     height: "1080px",
@@ -137,18 +140,17 @@ const MapContainer = () => {
                     <p>{ews[data].nama}</p>
                     {ews[data].energyFlow || ews[data].flowRate || ews[data].fluidSoundSpeed || ews[data].negativeAcc || ews[data].positiveAcc || ews[data].tempInlet || ews[data].tempOutlet || ews[data].velocity ? (
                       <>
-                       <Button href='/flowmeter'>Go to Realtime Data</Button>
+                        <Button href="/flowmeter">Go to Realtime Data</Button>
                       </>
                     ) : null}
                     {ews[data].currentR || ews[data].currentS || ews[data].currentT || ews[data].frequency || ews[data].power || ews[data].powerFactor || ews[data].voltR || ews[data].voltS || ews[data].voltT ? (
                       <>
-                        <Button href='/panel'>Go to Realtime Data</Button>
-                        
+                        <Button href="/panel">Go to Realtime Data</Button>
                       </>
                     ) : null}
                     {ews[data].current || ews[data].pressureBar || ews[data].pressurePascal || ews[data].pressurePsi || ews[data].voltage ? (
                       <>
-                         <Button href='/pressure'>Go to Realtime Data</Button>
+                        <Button href="/pressure">Go to Realtime Data</Button>
                       </>
                     ) : null}
                   </div>

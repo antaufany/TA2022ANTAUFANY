@@ -5,11 +5,14 @@ import CRUDHandler from "../Handler/CRUDHandler";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactSpeedometer from "react-d3-speedometer";
 import { Chart } from "react-google-charts";
+import { perf } from "../Firebase";
 const Riwayat = () => {
+  const Trace = perf.trace("ews-monitor");
+  Trace.start();
   const [getData, setGetData] = useState([]);
   const [setChild, setGetChild] = useState(null);
   const [dataGauge, setDataGauge] = useState([]);
-  const fss = useState(0);
+
   useEffect(() => {
     const ewsApp = CRUDHandler.getEws();
     ewsApp.on("value", (snapshot) => {
@@ -24,7 +27,7 @@ const Riwayat = () => {
       ewsApp.off();
     };
   }, [setChild, dataGauge]);
-
+  Trace.stop();
   return (
     <>
       <Navbarx />
@@ -34,13 +37,13 @@ const Riwayat = () => {
             <h1 className="fs-3 text">Ews Monitoring</h1>
           </Container>
           <Container className="d-flex align-content-end justify-content-end">
-            <Button href="/flowmeter" className="btn rounded-3 " style={{ margin: "10px 10px 10px 10px" }} onClick={() => setGetChild("flow-meter")}>
+            <Button className="btn rounded-3 " style={{ margin: "10px 10px 10px 10px" }} onClick={() => setGetChild("flow-meter")}>
               Flow Meter
             </Button>
-            <Button href="/panel" className="btn rounded-3 " style={{ margin: "10px 10px 10px 10px" }} onClick={() => setGetChild("panel-pompa")}>
+            <Button className="btn rounded-3 " style={{ margin: "10px 10px 10px 10px" }} onClick={() => setGetChild("panel-pompa")}>
               Panel Pompa
             </Button>
-            <Button href="/pressure" className="btn rounded-3 " style={{ margin: "10px 10px 10px 10px" }} onClick={() => setGetChild("pressure-solar")}>
+            <Button className="btn rounded-3 " style={{ margin: "10px 10px 10px 10px" }} onClick={() => setGetChild("pressure-solar")}>
               Pressure Solar
             </Button>
           </Container>

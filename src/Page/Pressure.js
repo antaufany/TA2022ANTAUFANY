@@ -8,7 +8,10 @@ import AccordionHeader from "react-bootstrap/esm/AccordionHeader";
 import AccordionBody from "react-bootstrap/esm/AccordionBody";
 import AccordionItem from "react-bootstrap/esm/AccordionItem";
 import { IoPhonePortraitOutline } from "react-icons/io5";
+import { perf } from "../Firebase";
 const Pressure = () => {
+  const Tracer = perf.trace("pressure-trace");
+  Tracer.start();
   const [getData, setGetData] = useState([]);
   const [dataGauge, setDataGauge] = useState([]);
   useEffect(() => {
@@ -25,6 +28,7 @@ const Pressure = () => {
       ewsApp.off();
     };
   }, [dataGauge]);
+  Tracer.stop();
 
   return (
     <>
