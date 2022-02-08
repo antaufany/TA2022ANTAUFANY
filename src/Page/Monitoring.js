@@ -9,6 +9,8 @@ import ToolkitProvider, { CSVExport, Search } from "react-bootstrap-table2-toolk
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import { AiFillPrinter } from "react-icons/ai";
 import { perf } from "../Firebase";
+import ReactDatatable from "@ashvin27/react-datatable";
+
 const Monitoring = () => {
   const Tracer = perf.trace("Monitoring");
   Tracer.start();
@@ -30,6 +32,7 @@ const Monitoring = () => {
         currentIndex.push(DataBinning[id]);
       }
       setCurrentIndex(currentIndex);
+      console.log(currentIndex);
     });
   };
   const settingDataEdit = (index) => {
@@ -42,6 +45,8 @@ const Monitoring = () => {
         currentIndex2.push(DataBinning[id]);
       }
       setCurrentIndex2(currentIndex2);
+
+      console.log(currentIndex2);
     });
   };
 
@@ -67,166 +72,162 @@ const Monitoring = () => {
 
   const columns = [
     {
-      dataField: "id.no",
-      text: "Nomor",
-      formatter: (cell, row, rowIndex, formatExtraData) => {
-        return rowIndex + 1;
-      },
-      sort: true,
-    },
-    {
-      dataField: "date",
+      key: "date",
       text: "Tanggal",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "sumur",
+      key: "sumur",
       text: "Sumur",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "time",
+      key: "time",
       text: "Waktu",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "temperature",
+      key: "temperature",
       text: "Suhu (°C)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "ph",
+      key: "ph",
       text: "PH (pH)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "tds",
+      key: "tds",
       text: "TDS (ppm)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "orp",
+      key: "orp",
       text: "ORP (mV)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "klorin",
+      key: "klorin",
       text: "FreeChlorine (ppm)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "submitter",
+      key: "submitter",
       text: "Submitter",
-      sort: true,
+      sortable: true,
     },
   ];
   const defaultSort = [
     {
-      dataField: "date",
+      key: "date",
       order: "asc",
     },
   ];
 
   const columns2 = [
     {
-      dataField: "id.no",
-      text: "Nomor",
-      formatter: (cell, row, rowIndex, formatExtraData) => {
-        return rowIndex + 1;
-      },
-      sort: true,
-    },
-    {
-      dataField: "date",
+      key: "date",
       text: "Tanggal",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "pipa",
+      key: "pipa",
       text: "Pipa",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "time",
+      key: "time",
       text: "Waktu",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "temperature",
+      key: "temperature",
       text: "Suhu (°C)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "flowrate",
+      key: "flowrate",
       text: "Flowrate (m^3/h)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "fss",
+      key: "fss",
       text: "FSS (m/s)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "velocity",
+      key: "velocity",
       text: "Velocity (m/s)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "flowestimasi",
+      key: "flowestimasi",
       text: "Flowestimasi (m^3)",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "dynamicpressure",
+      key: "dynamicpressure",
       text: "DynamicPressure",
-      sort: true,
+      sortable: true,
     },
     {
-      dataField: "submitter",
+      key: "submitter",
       text: "Submitter",
-      sort: true,
+      sortable: true,
     },
   ];
   const defaultSort2 = [
     {
-      dataField: "date",
+      key: "date",
       order: "asc",
     },
     {
-      dataField: "pipa",
+      key: "pipa",
       order: "asc",
     },
     {
-      dataField: "time",
+      key: "time",
       order: "asc",
     },
     {
-      dataField: "temperature",
+      key: "temperature",
       order: "asc",
     },
     {
-      dataField: "flowrate",
+      key: "flowrate",
       order: "asc",
     },
     {
-      dataField: "fss",
+      key: "fss",
       order: "asc",
     },
     {
-      dataField: "velocity",
+      key: "velocity",
       order: "asc",
     },
     {
-      dataField: "flowestimasi",
+      key: "flowestimasi",
       order: "asc",
     },
     {
-      dataField: "submitter",
+      key: "submitter",
       text: "Submitter",
-      sort: true,
+      sortable: true,
     },
   ];
-
+  const config = {
+    page_size: 10,
+    length_menu: [10, 20, 50],
+    show_filter: true,
+    show_pagination: true,
+    filename: "Data_Monitoring",
+    button: {
+      excel: true,
+      print: true,
+      csv: true,
+    },
+  };
+  Tracer.stop();
   return (
     <>
       <Navbarx />
@@ -250,23 +251,7 @@ const Monitoring = () => {
               </Dropdown.Menu>
             </Dropdown>
           </Container>
-          {currentIndex ? (
-            <ToolkitProvider bootstrap4 keyField="id.no" data={currentIndex} columns={columns2} defaultSorted={defaultSort2} search exportCSV={{ onlyExportFiltered: true, exportAll: false }}>
-              {(props) => (
-                <div>
-                  <Container fluid className="d-flex p-3 align-content-between justify-content-between">
-                    <SearchBar {...props.searchProps} />
-                    <ExportCSVButton {...props.csvProps} className="btn btn-primary align-self-end">
-                      <AiFillPrinter />
-                      Export Data Table
-                    </ExportCSVButton>
-                  </Container>
-                  <hr />
-                  <BootstrapTable {...props.baseProps} filter={filterFactory()} pagination={paginationFactory()} />
-                </div>
-              )}
-            </ToolkitProvider>
-          ) : null}
+          {currentIndex ? <ReactDatatable config={config} records={currentIndex} columns={columns2} /> : null}
 
           <Container fluid className="d-flex align-content-end justify-content-end ">
             <Dropdown fluid>
@@ -283,28 +268,11 @@ const Monitoring = () => {
             </Dropdown>
           </Container>
 
-          {currentIndex2 ? (
-            <ToolkitProvider bootstrap4 keyField="id.no" data={currentIndex2} columns={columns} defaultSorted={defaultSort} search exportCSV>
-              {(props) => (
-                <div>
-                  <Container fluid className="d-flex p-3 align-content-between justify-content-between">
-                    <SearchBar {...props.searchProps} />
-                    <ExportCSVButton {...props.csvProps} className="btn btn-primary align-self-end">
-                      <AiFillPrinter />
-                      Export Data Table
-                    </ExportCSVButton>
-                  </Container>
-                  <hr />
-                  <BootstrapTable {...props.baseProps} filter={filterFactory()} pagination={paginationFactory()} />
-                </div>
-              )}
-            </ToolkitProvider>
-          ) : null}
+          {currentIndex2 ? <ReactDatatable config={config} records={currentIndex2} columns={columns} /> : null}
         </Card>
       </Container>
     </>
   );
-  Tracer.stop();
 };
 
 export default Monitoring;
