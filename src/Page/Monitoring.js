@@ -258,7 +258,7 @@ const Monitoring = () => {
                     <SearchBar {...props.searchProps} />
                     <ExportCSVButton {...props.csvProps} className="btn btn-primary align-self-end">
                       <AiFillPrinter />
-                      Export Data Csv
+                      Export Data Table
                     </ExportCSVButton>
                   </Container>
                   <hr />
