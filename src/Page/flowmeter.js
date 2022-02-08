@@ -28,7 +28,6 @@ const Flowmeter = () => {
     };
   }, [dataGauge]);
   Tracer.stop();
-
   return (
     <>
       <Navbarx />

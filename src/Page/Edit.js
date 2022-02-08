@@ -71,7 +71,6 @@ const Edit = () => {
     },
   ];
 
-  Trace.stop();
   return (
     <>
       <Navbarx />
@@ -94,6 +93,7 @@ const Edit = () => {
       </Container>
     </>
   );
+  Trace.stop();
 };
 
 export default Edit;

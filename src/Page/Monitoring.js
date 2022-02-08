@@ -30,7 +30,6 @@ const Monitoring = () => {
         currentIndex.push(DataBinning[id]);
       }
       setCurrentIndex(currentIndex);
-      console.log(currentIndex);
     });
   };
   const settingDataEdit = (index) => {
@@ -43,8 +42,6 @@ const Monitoring = () => {
         currentIndex2.push(DataBinning[id]);
       }
       setCurrentIndex2(currentIndex2);
-
-      console.log(currentIndex2);
     });
   };
 
@@ -229,7 +226,7 @@ const Monitoring = () => {
       sort: true,
     },
   ];
-  Tracer.stop();
+
   return (
     <>
       <Navbarx />
@@ -294,7 +291,7 @@ const Monitoring = () => {
                     <SearchBar {...props.searchProps} />
                     <ExportCSVButton {...props.csvProps} className="btn btn-primary align-self-end">
                       <AiFillPrinter />
-                      Export Data Csv
+                      Export Data Table
                     </ExportCSVButton>
                   </Container>
                   <hr />
@@ -307,6 +304,7 @@ const Monitoring = () => {
       </Container>
     </>
   );
+  Tracer.stop();
 };
 
 export default Monitoring;

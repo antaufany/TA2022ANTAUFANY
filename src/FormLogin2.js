@@ -27,7 +27,7 @@ const FormLogin2 = () => {
     }
     setLoading(false);
   }
-  Trace.stop();
+
   return (
     <>
       <Container fluid className="p-5 m-auto" style={{ backgroundImage: "url(/img/bgbaru.png)" }}>
@@ -62,6 +62,7 @@ const FormLogin2 = () => {
       </Container>
     </>
   );
+  Trace.stop();
 };
 
 export default FormLogin2;

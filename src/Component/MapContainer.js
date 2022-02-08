@@ -64,9 +64,7 @@ const MapContainer = () => {
     maxWidth: "3840px",
     height: "1080px",
   };
-  const onLoad = (infoWindow) => {
-    console.log("infoWindows", infoWindow);
-  };
+  const onLoad = (infoWindow) => {};
   const divStyle = {
     background: `white`,
     border: `1px solid #ccc`,
